@@ -1,8 +1,8 @@
-use super::city::City;
+use crate::city::city::City;
 use rand::Rng;
 pub const MIN_POSITIVE: f64 = 2.2250738585072014e-308f64;
 
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub struct Individual {
     pub dna : Vec<usize>,
     pub fitness : f64,
@@ -20,7 +20,7 @@ impl Individual {
          let n = self.dna.len();
          let mut rng = rand::thread_rng();
          let start = rng.gen_range(0,n-1);
-         let end = rng.gen_range(start+1,n-1);
+         let end = rng.gen_range(start,n-1);
          let first_child_dna = crossover_dna(&self.dna,&other.dna,start,end);
          let second_child_dna = crossover_dna(&other.dna,&self.dna,start,end);
          (Individual::new(first_child_dna,cities),Individual::new(second_child_dna,cities))
