@@ -1,0 +1,6 @@
+digraph {
+  node [style=filled]
+  a -> b
+  a -> c
+  a -> d
+}

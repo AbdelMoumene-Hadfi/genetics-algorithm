@@ -44,7 +44,7 @@ impl Simulation {
     pub fn run(&mut self) {
         let mut population = random_population(self.population_size,&self.cities);
         let mut champion = find_fittest(&population);
-        for i in 0..self.iteration {
+        for _ in 0..self.iteration {
             println!("{:?}",champion);
             population = self.generat_population(population);
             let chall = find_fittest(&population);
@@ -52,6 +52,19 @@ impl Simulation {
                 champion = chall;
             }
         }
+        println!("------------------");
+        println!("Result");
+        println!("------------------");
+        println!("Iteration : {:?}",self.iteration);
+        println!("crossover probability : {:?}",self.crossover_prob);
+        println!("mutation probability : {:?}",self.mutation_prob);
+        println!("population size : {:?}",self.population_size);
+        println!("number of cities : {:?}",self.cities.len());
+        println!("Best Travel Path Founded : {:?}",champion.dna);
+        println!("Fitness score : {:?}",champion.fitness);
+        println!("number of crossover : {:?}",self.count_crossover);
+        println!("number of mutation : {:?}",self.count_mutation);
+
     }
     fn generat_child(&mut self,first_parent:&Individual,second_parent:&Individual) -> (Individual,Individual){
         if thread_rng().gen_bool(self.crossover_prob) {
